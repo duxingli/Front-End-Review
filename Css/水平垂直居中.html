@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            margin:0;
+        }
+        /* 这三种都用到了父相子绝 */
+        /*.wrap{*/
+        /*    position:relative;*/
+        /*    width:400px;*/
+        /*    height:400px;*/
+        /*    background-color: skyblue;*/
+        /*}*/
+        /*.box{*/
+        /*    position: absolute;*/
+        /*    width:200px;*/
+        /*    height:200px;*/
+        /*    background-color: red;*/
+        /*    left:0;*/
+        /*    top:0;*/
+        /*    right:0;*/
+        /*    bottom:0;*/
+        /*    margin:auto;*/
+        /*}*/
+
+        /*.wrap{*/
+        /*    position:relative;*/
+        /*    width:400px;*/
+        /*    height:400px;*/
+        /*    background-color: skyblue;*/
+        /*}*/
+        /*.box{*/
+        /*    position: absolute;*/
+        /*    width:100px;*/
+        /*    height:100px;*/
+        /*    background-color: red;*/
+        /*    left:50%;*/
+        /*    top:50%;*/
+        /*    transform:translate(-50%, -50%);*/
+        /*    !*margin:-50px 0 0 -50px;*!*/
+        /*}*/
+        /**
+
+            水平居中：
+                块：margin:0 auto
+                行：text-align:center
+         */
+
+        /* 第四种 flex布局  */
+        /*.wrap{*/
+        /*    display: flex;*/
+        /*    align-items:center; !*垂直居中*!*/
+        /*    justify-content: center; !*水平居中*!*/
+        /*    width: 300px;*/
+        /*    height: 300px;*/
+        /*    background-color: red;*/
+        /*}*/
+        /*.wrap .box{*/
+        /*    width: 100px;*/
+        /*    height: 100px;*/
+        /*    background-color: pink; !*方便看效果*!*/
+        /*}*/
+
+        /* 利用text-align:center和vertical-align:middle属性   */
+
+        /*font-size:0清除display:inline-block元素换行符间隙*/
+        .wrap{
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.5);
+            text-align:center;
+            font-size:0;
+            white-space: nowrap;
+            overflow:auto;
+        }
+        .wrap::after{
+            content:"";
+            display: inline-block;
+            height:100%;
+            vertical-align: middle;
+        }
+        .box {
+            display: inline-block;
+            width: 500px;
+            height: 400px;
+            background-color: pink;
+            white-space: normal;
+            vertical-align: middle;
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="box"></div>
+</div>
+</body>
+</html>

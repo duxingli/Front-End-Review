@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    .text1{
+      white-space:nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; /*  省略符号  */
+    }
+    /* webkit 浏览器
+        display: -webkit-box 将对象作为弹性伸缩盒子模型显示；
+        -webkit-box-orient 设置或检索伸缩盒对象的子元素的排列方式；
+        text-overflow: ellipsis 用省略号“…”隐藏超出范围的文本。
+    */
+
+    /*.text2{*/
+    /*    overflow: hidden;*/
+    /*    text-overflow: ellipsis;*/
+    /*    display: -webkit-box;*/
+    /*    -webkit-line-clamp:3;*/
+    /*    -webkit-box-orient:vertical;*/
+    /*}*/
+
+    /*CSS的属性可以直接控制多行文本的省略显示，比较靠谱的办法应该就是利用相对定位在最后面加上一个省略号了，代码可以参考下面*/
+    .text2{
+        position: relative;
+        line-height: 1.5em;
+        /* 2行 */
+        height:4.5em;
+        overflow: hidden;
+        word-break: break-all;
+    }
+    .text2:after{
+        position: absolute;
+        content: '...';
+        bottom: 0;
+        right: 0;
+        background-color: #fff;
+    }
+
+  </style>
+</head>
+<body>
+      <p class="text1">还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是</p>
+      <p class="text2">还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是还需要注意的是</p>
+</body>
+</html>
