@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .outer{
+      display:flex;
+      height:100px;
+    }
+    /*设为 Flex 布局以后，子元素的float、clear和vertical-align属性将失效*/
+    .left{
+      /*flex-grow:0; !* default 0 *!*/
+      /*flex-shrink:0; !*默认为1，即如果空间不足，该项目将缩小。 如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。*!*/
+      /*flex-basis:200px; !* default auto *!*/
+
+      flex: 0 0 200px; /* flex-grow'> <'flex-shrink'>? || <'flex-basis'>*/
+      background-color: tomato;
+    }
+    .right{
+      flex:auto;
+      background-color: gold;
+    }
+  </style>
+</head>
+<body>
+<div class="outer">
+  <div class="left"></div>
+  <div class="right"></div>
+</div>
+</body>
+</html>

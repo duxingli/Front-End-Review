@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*
+        在CSS中，圣杯布局是指两边盒子宽度固定，中间盒子自适应的三栏布局，其中，中间栏放到文档流前面，保证先行渲染；三栏全部使用“float:left”浮动，并配合left和right属性。前端的两个经
+    这里以左边宽度固定为100px，右边宽度固定为200px为例。
+
+        利用浮动和负边距来实现。父级元素设置左右的 padding，三列均设置向左浮动，中间一列放在最前面，宽度设置为父级元素的宽度，因此后面两列都被挤到了下一行，通过设置 margin 负值将其移动到上一行，再利用相对定位，定位到两边
+    */
+        .outer{
+            height:100px;
+        }
+        .left{
+            float:left;
+            margin-left:-100% ;
+
+            width: 100px;
+            height: 100px;
+            background: tomato;
+        }
+        .right{
+            float: right;
+            margin-left: -200px;
+
+            width: 200px;
+            height: 100px;
+            background: gold;
+        }
+        .center{
+            float:left;
+            width: 100%;
+            height: 100px;
+            background: lightgreen;
+        }
+    </style>
+</head>
+<body>
+<div class="outer">
+    <div class="center"></div>
+    <div class="left"></div>
+    <div class="right"></div>
+</div>
+</body>
+</html>

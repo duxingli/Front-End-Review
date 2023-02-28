@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    /*三栏布局一般指的是页面中一共有三栏，左右两栏宽度固定，中间自适应的布局，一共有五种实现方式。
+这里以左边宽度固定为100px，右边宽度固定为200px为例。*/
+    .outer{
+      position:relative;
+      height:100px;
+    }
+    .left{
+      float:left;
+      width: 100px;
+      height: 100px;
+      background-color: tomato;
+    }
+    .right{
+      float:left;
+      width:200px;
+      height:100px;
+      background-color: gold;
+    }
+    .center{
+      float:left;
+      width:calc(100% - 100px - 200px);
+      height:100px;
+      background: lightgreen;
+    }
+  </style>
+</head>
+<body>
+<div class="outer">
+  <div class="left"></div>
+  <div class="center"></div>
+  <div class="right"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    /* 都是相对于屏幕宽度的比例 */
+    .square1{
+      width:10%;
+      height:10vw;
+      background-color: red;
+    }
+    /*2.第二种方式是利用元素的margin/padding百分比是相对父元素width的性质来实现*/
+    .square2{
+      width:20%;
+      height:0;
+      padding-top: 20%;
+      /*padding-bottom:20%;*/
+      background-color: orange;
+    }
+    /*3.第三种方式是利用子元素的margin-top的值来实现的*/
+    .square3{
+      width:30%;
+      overflow:hidden;
+      /* 垂直外边距合并 开启BFC */
+      background-color: yellow;
+    }
+    .square3::after{
+      content:'';
+      display:block;
+      margin-top:100%;
+    }
+    /*  关于overflow:hidden;  https://zhuanlan.zhihu.com/p/142385437*/
+  </style>
+</head>
+<body>
+<div class="square1"></div>
+<div class="square2"></div>
+<div class="square3"></div>
+</body>
+</html>
