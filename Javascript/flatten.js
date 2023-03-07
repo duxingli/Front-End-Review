@@ -11,6 +11,7 @@ function flatten(arr,depth=1){
     return copy;
 }
 
+
 // 方法一 ES6
 // function flatten(arr){
 //     return arr.flat(Infinity)
