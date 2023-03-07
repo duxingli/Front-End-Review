@@ -1,6 +1,7 @@
 let arr = [2,5,[7,8,[2,3,1,[3,9,8,[2,8]]]]]
 
 // 可以带深度的
+
 function flatten(arr,depth=1){
     let copy = arr.slice();
     while(copy.some(item => Array.isArray(item)) && depth >0){
