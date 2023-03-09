@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    #signal-lamp {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 1px solid #ffcecc;
+    }
+  </style>
+</head>
+<body>
+<div id="signal-lamp"></div>
+<button class="btn" onclick="run()">执行</button>
+<span id="showText"></span>
+</body>
+<script>
+  function sleep(ms){
+    return new Promise(function(resolve){
+      setTimeout(resolve, ms);
+    })
+  }
+
+
+  // 改变颜色 等待参数时间 （时间及颜色均为参数）
+  async function ChangeColor(ms, color){
+    // 改变颜色
+    document.getElementById("signal-lamp").style.background = color;
+    // 打印出显示时间
+    document.getElementById("showText").innerText = `${color}:显示${ms}ms`;
+    // 睡眠ms毫秒
+    await sleep(ms);
+  }
+
+  // 循环依次执行
+  async function run(){
+    // while 循环
+    while (true) {
+      // 绿灯 1.8s
+      await ChangeColor(1800,"green");
+      // 黄灯 0.8s
+      await ChangeColor(800, "yellow");
+      // 红灯 1.2s
+      await ChangeColor(1200, "red");
+    }
+  }
+</script>
+</html>
