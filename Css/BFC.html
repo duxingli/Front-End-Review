@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    .container{
+      background-color: #ccc;
+    }
+    .left{
+      float:left;
+    }
+    .bfc{
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+<!--
+  Block format context，块级格式化上下文
+  一块独立渲染区域，内部元素的渲染不会影响边界以外的元素
+
+    情况一、如果是父子关系元素，触发条件添加给父元素。
+    情况二、如果是兄弟关系元素，触发条件添加第二个元素。
+  形成BFC的常见条件:
+    float 不是none
+    display 是 flex inline-block等
+    position 是absolute 或 fixed
+    overflow 不是 visible
+  应用：清除浮动
+-->
+</body>
+<div class="container bfc">
+<!-- bfc  防止图片脱离文档流跑出去  -->
+  <img src="../images/1.jpg" alt="" class="left">
+  <p class="bfc">某一段文字......</p>
+<!-- bfc  让p感受到图片的位置 -->
+</div>
+</html>

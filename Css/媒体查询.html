@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    @media only screen and (max-width:374px){
+      html{
+        /* iphone5 或者更小的尺寸，以 iphone5 的宽度 (320px) 比例设置 font-size */
+        font-size:86px;
+      }
+    }
+    @media only screen and (min-width:375px) and (max-width:413px){
+      html{
+        /* iphone6/7/8 和 iphone x */
+        font-size:100px;
+      }
+    }
+    @media only screen and(min-width:414px){
+      html{
+        /*iphone6p 或者更大的尺寸，以 iphone6p 的宽度 (414px) 比例设置 font-size */
+        font-size:110px;
+      }
+    }
+    /*body{*/
+    /*  font-size:0.24rem;*/
+    /*}*/
+    #div1{
+      width:5rem;
+      background-color: #ccc;
+    }
+  </style>
+</head>
+<body>
+<div id="div1">
+  this is div
+</div>
+<!-- rem 弊端： 阶梯形-->
+</body>
+</html>

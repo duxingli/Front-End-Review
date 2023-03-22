@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>margin负值</title>
+  <style>
+    body{
+      margin:20px;
+    }
+    .float-left{
+      float:left;
+    }
+    .clearfix:after{
+      content:"";
+      display:table;
+      clear:both;
+    }
+    .container{
+      border:1px solid #ccc;
+      padding:10px;
+    }
+    .container .item{
+      width:100px;
+      height:100px;
+    }
+    .border-red{
+      border:1px solid red;
+      margin-left:-10px;
+      margin-top:-10px;
+    }
+    .border-blue{
+      border:1px solid blue;
+      margin-right:-10px;
+      margin-bottom:-10px;
+    }
+  </style>
+</head>
+<body>
+<!--
+  margin-top 和margin-left 负值，元素向上、向左移动
+  margin-right 负值，右侧元素左移，自身不受影响
+  margin-bottom 负值，下方元素上移，自身不受影响
+-->
+  <div class="container">
+    <div class="item border-blue">
+      this is item1
+    </div>
+    <div class="item border-red">
+      this is item2
+    </div>
+  </div>
+  <p>用于测试margin left right 的负数情况</p>
+  <div class="container clearfix">
+    <div class="item border-blue float-left">
+      this is item 3
+    </div>
+    <div class="item border-red float-left">
+      this is item 4
+    </div>
+  </div>
+</body>
+</html>
