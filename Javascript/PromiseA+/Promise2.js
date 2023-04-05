@@ -14,7 +14,7 @@
 
 // 增加了异步版本
 const PENDING = "PENDING"
-const RESOLVED = "RESOLVED"
+const FULFILLED = "FULFILLED"
 const REJECTED = "REJECTED"
 class Promise{
     // 1. 看这个属性能否在原型上使用
@@ -31,7 +31,7 @@ class Promise{
             // 只有状态为 PENDING 时才允许修改状态，因为promise状态不可逆
             if(this.status === PENDING){
                 this.value = value;
-                this.status = RESOLVED;
+                this.status = FULFILLED;
                 // 发布
                 this.onResolvedCallbacks.forEach(fn=>fn());
             }
@@ -66,7 +66,7 @@ class Promise{
      */
     then(onFulfilled,  onRejected){
         // 同步处理
-        if(this.status === RESOLVED){
+        if(this.status === FULFILLED){
             onFulfilled(this.value)
         }
         if(this.status === REJECTED){

@@ -1,5 +1,5 @@
 const PENDING = "PENDING"
-const RESOLVED = "RESOLVED"
+const FULFILLED = "FULFILLED"
 const REJECTED = "REJECTED"
 // 基础版
 class Promise {
@@ -12,7 +12,7 @@ class Promise {
             // 只有状态为 PENDING 时才允许修改状态，因为promise状态不可逆
             if (this.status === PENDING) {
                 this.value = value
-                this.status = RESOLVED
+                this.status = FULFILLED
             }
         }
         const reject = reason => {
@@ -30,7 +30,7 @@ class Promise {
         }
     }
     then(onFulfilled, onRejected) {
-        if (this.status === RESOLVED) {
+        if (this.status === FULFILLED) {
             onFulfilled(this.value)
         }
         if (this.status === REJECTED) {

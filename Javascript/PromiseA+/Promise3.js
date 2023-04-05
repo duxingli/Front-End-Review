@@ -5,7 +5,7 @@
 // then 链式调用 可选参数
 
 const PENDING = "PENDING"
-const RESOLVED = "RESOLVED"
+const FULFILLED = "FULFILLED"
 const REJECTED = "REJECTED"
 
 const resolvePromise = (promise2, x, resolve, reject)=>{
@@ -18,7 +18,7 @@ const resolvePromise = (promise2, x, resolve, reject)=>{
         // 判断x的类型
         // promise 有n种实现 都符合了这个规范 兼容别人的promise
         // 严谨 应该判断 别人的promise 如果失败了就不能再调用成功 如果成功了不能再调用失败
-         //内部测试的时候 会成功和失败都调用
+        //内部测试的时候 会成功和失败都调用
         try{
             // then属性可能出错 then通过defineProperty来定义的
             // 怎么判断 x是不是一个promise 看他有没有then方法
@@ -40,7 +40,7 @@ const resolvePromise = (promise2, x, resolve, reject)=>{
                         return;
                     }
                     called = true;
-                    // 报错的时候就直接往下走，不用再担心 是不是 peomise 了
+                    // 报错的时候就直接往下走，不用再担心 是不是 promise 了
                     reject(r);
                 })
             }else{
@@ -59,6 +59,7 @@ const resolvePromise = (promise2, x, resolve, reject)=>{
         resolve(x);
     }
 }
+
 class Promise{
     // 1. 看这个属性能否在原型上使用
     // 2. 看这个属性是否公用
@@ -74,13 +75,13 @@ class Promise{
             // 只有状态为 PENDING 时才允许修改状态，因为promise状态不可逆
             if(this.status === PENDING){
                 this.value = value;
-                this.status = RESOLVED;
+                this.status = FULFILLED;
                 // 发布
                 this.onResolvedCallbacks.forEach(fn=>fn());
             }
-
         }
         const reject = (reason)=>{
+
             if(this.status === PENDING){
                 this.reason = reason;
                 this.status = REJECTED;
@@ -123,7 +124,7 @@ class Promise{
         let promise2;
         promise2 = new  Promise((resolve, reject)=>{
             // 同步处理
-            if(this.status === RESOLVED){
+            if(this.status === FULFILLED){
                 // 宏任务 为了保证promise2已经new完了
                 setTimeout(()=>{
                     try{
@@ -183,7 +184,22 @@ class Promise{
         })
         return promise2;
     }
+    catch(onRejected){
+        // 借助 之前实现的 .then 方法将错误信息传入该回调函数
+        this.then(null, onRejected)
+    }
+    finally(callback){
+        return this.then(data => {
+            return Promise.resolve(callback()).then(() => data)
+        }, err => {
+            return Promise.resolve(callback()).then(() => {
+                throw err
+            })
+        })
+    }
 }
+
+
 
 // 测试代码
 // npm install -g promises-aplus-tests
@@ -192,14 +208,18 @@ class Promise{
 // 希望测试一下这个库是否符合我们的promise A+规范
 // promises-aplus-tests Promise3.js
 
-// Promise.defer = Promise.deferred = function(){
-//     let dfd = {};
-//     dfd.promise = new Promise((resolve,reject)=>{
-//         dfd.resolve = resolve;
-//         dfd.reject = reject;
-//     });
-//     return dfd;
-// }
+
+// Promise.defer() 可以解决封装嵌套的问题
+Promise.defer = Promise.deferred = function(){
+    let dfd = {};
+    dfd.promise = new Promise((resolve,reject)=>{
+        dfd.resolve = resolve;
+        dfd.reject = reject;
+    });
+    return dfd;
+}
+
+
 
 module.exports = Promise
 

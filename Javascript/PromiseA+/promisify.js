@@ -17,6 +17,8 @@ const promisify = (fn)=>{
 //     }
 // }
 const promises = (target)=>{
+    //  将对象转为数组,遍历数组中的fn，依次完成 promisify 操作
+    //   Object.keys(obj).forEach
     Reflect.ownKeys(target).forEach(key =>{
         if(typeof target[key] === 'function'){
             // 默认会将原有的方法 全部增加一个 Async 后缀 变成 promise 写法

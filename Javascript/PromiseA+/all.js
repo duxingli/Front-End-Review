@@ -1,5 +1,11 @@
 // Promise.all 全部  可以实现等待所有的异步执行完后，拿到统一的结果
 // 解决异步开发 同步处理结果
+/**
+ *
+ * Promise.all() 方法接收一个 promise 的 iterable 类型（注：Array，Map，Set 都属于 ES6 的 iterable 类型）的输入，
+ * 并且只返回一个Promise实例，那个输入的所有 promise 的 resolve 回调的结果是一个数组。
+ * 这个Promise的 resolve 回调执行是在所有输入的 promise 的 resolve 回调都结束，或者输入的 iterable 里没有 promise 了的时候。它的 reject 回调执行时，只要任何一个输入的 promise 的 reject 回调执行或者输入不合法的 promise 就会立即抛出错误，并且 reject 的是第一个抛出的错误信息。
+ */
 let Promise1 = require("./Promise3");
 //
 let fs = require("fs");
