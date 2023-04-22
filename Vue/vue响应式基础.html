@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let obj = {
+            a: 1,
+            b: 2,
+            c: 3
+        }
+
+        // let a = obj.a * 10;
+        // obj.a = 10;
+
+        // 实现obj.a = 10;  a 变为100
+
+        // function reactive(obj) {
+        //     let proxy = new Proxy(obj, {
+        //         get(obj, prop) {
+        //             return obj[prop];
+        //         },
+        //         set(obj, prop, value) {
+        //             obj[prop] = value;
+        //             a = proxy.a * 10;
+        //         }
+        //     })
+        //     return proxy
+        // }
+        // let proxy = reactive(obj)
+        // proxy.a = 10;
+        // console.log(a) //100
+
+        let subscribe = [];
+
+        function reactive(obj) {
+            let proxy = new Proxy(obj, {
+                get(obj, prop) {
+                    return obj[prop];
+                },
+                set(obj, prop, value) {
+                    obj[prop] = value;
+                    subscribe.forEach(fn => fn())
+                    // 把所有依赖注入，还没有分类
+                }
+            })
+            return proxy;
+        }
+
+        let proxy = reactive(obj)
+        
+        function effect (fn){
+            fn();
+            subscribe.push(fn);
+        }
+
+        effect(() => {a = proxy.a * 10});
+
+        proxy.a = 10;
+        console.log(a) 
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let obj = {
+            a:1,
+            b:2
+        }
+        // 创建代理
+        // let proxy = new Proxy(obj, {
+        //     // 捕获器   目标对象、要壹询的属性，代理对象
+        //     get(target, prop, rec){
+        //         console.log(target) // {a: 1, b: 2}
+        //         console.log(prop) // a
+        //         console.log(rec) // Proxy(Object) {a: 1, b: 2}
+        //         // {a: 1, b: 2}
+        //         return "123"
+        //     }
+        // })
+        // console.log(proxy.a) // 123
+
+
+        // let proxy = new Proxy(obj,{
+        //     get(target, prop, rec){
+        //         return target[prop]
+        //     }
+        // })
+        // console.log(proxy.a) // 1
+
+
+
+        // let proxy = new Proxy(obj,{
+        //      // 目标对象、目标对象上的字符串键属性 、赋给属性的值、接收是初赋值的对象
+        //     set(target,prop,value,rec){
+        //        console.log(target) // {a: 1, b: 2}
+        //        console.log(prop) // a
+        //        console.log(value) // 5
+        //        console.log(rec) // Proxy(Object) {a: 1, b: 2}
+        //     }
+        // })
+        // proxy.a=5;
+        // console.log(proxy)
+
+
+        let proxy = new Proxy(obj,{
+            set(target,prop,value,rec){
+                target[prop] = value;
+            }
+        })
+
+
+    </script>
+</body>
+</html>

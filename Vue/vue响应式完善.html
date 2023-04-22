@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let obj = {
+            a: 1,
+            b: 2,
+            c: 3
+        }
+        let obj2 = {
+            a: 1,
+            b: 2,
+        }
+        let a, b, c, a2, b2, c2;
+        let handlers = new Map(); // 存对象
+        let reactives = [];
+
+        // 处理多个代理对象
+        // 对象中的 依赖函数进行收集 - 函数中可以你赖多个代理变量
+        // 重点设计:是在get中收集依赖,在efect中对依赖进行处理
+
+        function reactive(obj) {
+            let proxy = new Proxy(obj, {
+                get(obj, prop) {
+                    reactives.push([obj, prop])
+                    return obj[prop];
+                },
+                set(obj, prop, value) {
+                    obj[prop] = value;
+                    if(handlers.has(obj) && handlers.get(obj).has(prop)){
+                        handlers.get(obj).get(prop).forEach(fn => fn());
+                    }
+                    // 把所有依赖注入，还没有分类
+                }
+            })
+            return proxy;
+        }
+
+        let proxy = reactive(obj)
+        let proxy2 = reactive(obj2)
+
+
+
+        function effect (fn){
+            reactives = [];
+            fn();
+            reactives.forEach(item => {
+                let [obj, prop] = item;
+                if(!handlers.has(obj)){
+                    handlers.set(obj, new Map())
+                }
+                if(!handlers.get(obj).has(prop)){
+                    handlers.get(obj).set(prop, []); // [fn,fn,fn]
+                }
+                handlers.get(obj).get(prop).push(fn);
+            })
+        }
+
+        effect(() => {a = proxy.a * 10; b = proxy.b * 10;});
+        effect(() => {c = proxy.a * 10});
+        effect(() => {a2 = proxy2.a *10; b2 = proxy2.b * 10;})
+
+        console.log(handlers)
+        proxy.a = 10;
+        console.log(a);
+
+        /**
+         *  实现简单的需求
+         *  处理多个代理对象
+         *      对象中的 依赖函数进行收集 ~ 函数中可以依赖多个代理变量
+         * 
+         *  重点设计：是在get中收集依赖，在 effect中对依赖进行处理
+         * 
+         * 
+         * proxy   a [fn,fn,fn,fn]
+         *         b fn 
+         * 
+         * proxy2  a fn fn fn
+         *         b fn fn fn
+         */
+    </script>
+</body>
+
+</html>
